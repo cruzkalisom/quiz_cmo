@@ -1,0 +1,145 @@
+/* Estilos Gerais */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Container do Quiz */
+.quiz-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+    transform-origin: top;
+}
+
+/* Título */
+h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+    animation: slideDown 0.7s ease-in-out;
+}
+
+/* Perguntas e Alternativas */
+.question {
+    margin-bottom: 20px;
+    text-align: left;
+    animation: popUp 0.8s ease-in-out;
+}
+
+.question p {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: #444;
+}
+
+.question label {
+    display: block;
+    padding: 5px 0;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* Animação ao passar o mouse */
+label:hover {
+    transform: scale(1.05);
+}
+
+/* Botão de Envio */
+button {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+    transition: background-color 0.3s, transform 0.2s;
+    animation: bounce 2s infinite 2s;
+}
+
+button:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+/* Resultado */
+#result {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    opacity: 0;
+    animation: fadeInResult 0.8s ease-in-out forwards;
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeInResult {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes popUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
