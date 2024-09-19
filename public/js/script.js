@@ -92,7 +92,7 @@ function renderQuiz() {
     selectedQuestions.forEach((q, index) => {
         quizContainer.innerHTML += `
             <div class="question">
-                <p>${q.question}</p>
+                <p><strong>${q.question}</strong></p>
                 <label>
                     <input type="radio" name="question${index}" value="a"> ${q.answers.a}
                 </label><br>
