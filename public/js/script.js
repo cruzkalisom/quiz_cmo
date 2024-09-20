@@ -102,7 +102,7 @@ function renderQuiz() {
 
         quizContainer.innerHTML += `
             <div class="question">
-                <p>${currentQuestion.question}</p>
+                <p><strong>${currentQuestion.question}</strong></p>
                 ${answers.join('')}
             </div>
         `;
