@@ -9,11 +9,12 @@
 <body>
     <div class="quiz-container">
         <h1>Quiz Feira de Ciências</h1>
-        <div id="quiz"></div>
-        <button id="submit">Enviar Respostas</button>
+        <form id="quizForm">
+            <div id="quiz"></div>
+            <button id="button-submit" type="button" onclick="submitQuiz()">Enviar</button>
+        </form>
         <div id="result"></div>
     </div>
-    
     <script src="public/js/script.js"></script>
 </body>
 </html>

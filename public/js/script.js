@@ -80,64 +80,64 @@ const questions = [
 // Função para selecionar 3 perguntas aleatórias
 function getRandomQuestions() {
     const shuffled = questions.sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, 3);
+    return shuffled.slice(0, 3); // Retorna 3 perguntas
 }
 
-// Renderiza as perguntas no HTML
+// Renderizar o quiz
 function renderQuiz() {
     const quizContainer = document.getElementById('quiz');
-    const selectedQuestions = getRandomQuestions();
-    quizContainer.innerHTML = '';
+    const randomQuestions = getRandomQuestions();
 
-    selectedQuestions.forEach((q, index) => {
+    randomQuestions.forEach((currentQuestion, questionIndex) => {
+        const answers = [];
+
+        for (let letter in currentQuestion.answers) {
+            answers.push(
+                `<label>
+                    <input type="radio" name="question${questionIndex}" value="${letter}">
+                    ${letter}: ${currentQuestion.answers[letter]}
+                </label>`
+            );
+        }
+
         quizContainer.innerHTML += `
             <div class="question">
-                <p><strong>${q.question}</strong></p>
-                <label>
-                    <input type="radio" name="question${index}" value="a"> ${q.answers.a}
-                </label><br>
-                <label>
-                    <input type="radio" name="question${index}" value="b"> ${q.answers.b}
-                </label><br>
-                <label>
-                    <input type="radio" name="question${index}" value="c"> ${q.answers.c}
-                </label><br>
-                <label>
-                    <input type="radio" name="question${index}" value="d"> ${q.answers.d}
-                </label>
+                <p>${currentQuestion.question}</p>
+                ${answers.join('')}
             </div>
         `;
     });
-
-    return selectedQuestions;
 }
 
-// Função para verificar as respostas
-function checkAnswers(questions) {
-    let correctCount = 0;
+// Função para verificar e exibir os resultados
+function submitQuiz() {
+    const quizForm = document.getElementById('quizForm');
+    const resultContainer = document.getElementById('result');
+    const quizQuestions = document.querySelectorAll('.question');
+    let score = 0;
+    let output = '';
 
-    questions.forEach((q, index) => {
-        const selectedAnswer = document.querySelector(`input[name="question${index}"]:checked`);
-        if (selectedAnswer && selectedAnswer.value === q.correctAnswer) {
-            correctCount++;
+    // Verificar respostas
+    quizQuestions.forEach((question, questionIndex) => {
+        const selectedAnswer = quizForm[`question${questionIndex}`].value;
+        const correctAnswer = questions[questionIndex].correctAnswer;
+
+        if (selectedAnswer === correctAnswer) {
+            score++;
+            output += `<p class="correct">Questão ${questionIndex + 1}: Correta!</p>`;
+        } else {
+            output += `<p class="incorrect">Questão ${questionIndex + 1}: Errada. Resposta correta: ${correctAnswer}</p>`;
         }
     });
 
-    return correctCount === questions.length;
+    document.getElementById('button-submit').hidden = true
+
+    // Exibir a pontuação final
+    resultContainer.innerHTML = `
+        <p>Você acertou ${score} de ${quizQuestions.length} questões.</p>
+        ${output}
+    `;
 }
 
-// Lógica de envio e validação do quiz
-document.getElementById('submit').addEventListener('click', function() {
-    const selectedQuestions = renderQuiz.selectedQuestions || getRandomQuestions();
-    const allCorrect = checkAnswers(selectedQuestions);
-
-    const resultContainer = document.getElementById('result');
-    if (allCorrect) {
-        resultContainer.textContent = "Parabéns! Você acertou todas as perguntas!";
-    } else {
-        resultContainer.textContent = "Algumas respostas estão incorretas. Tente novamente.";
-    }
-});
-
-// Inicializa o quiz
+// Inicializar o quiz
 renderQuiz();
